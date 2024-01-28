@@ -160,3 +160,5 @@ Parametros:
 # Observaciones
 
 En caso de tener un error asi en el log **Route [login] not defined**. de debe agregar a los **headers** de la api en **Postman** el **Accept: application/json**.
+
+El archivo **Postman** en la **collection** tiene una variable de nombre **base_url** es la que se debe cambiar con el **host name** que se vaya a utiliar.
