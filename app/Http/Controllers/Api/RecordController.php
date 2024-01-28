@@ -20,7 +20,10 @@ class RecordController extends Controller
                 return $this->errorResponse(null, self::BAD_REQUEST);
             }
 
-            return RecordResource::collection($record);
+            $recordResource = RecordResource::collection($record);
+
+            return $this->successResponse($recordResource, self::OK);
+
 
         } catch (\Exception $e) {
 
@@ -56,7 +59,9 @@ class RecordController extends Controller
                 return $this->errorResponse(null, self::BAD_REQUEST);
             }
 
-            return new RecordResource($record);
+            $recordResource = new RecordResource($record);
+
+            return $this->successResponse($recordResource, self::OK);
 
         } catch (\Exception $e) {
 

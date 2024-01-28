@@ -28,7 +28,9 @@ class WeatherController extends Controller
                 return $this->errorResponse(null, self::BAD_REQUEST);
             }
 
-            return WeatherResource::collection($weather);
+            $weatherResource = WeatherResource::collection($weather);
+
+            return $this->successResponse($weatherResource, self::OK);
 
         } catch (\Exception $e) {
 
@@ -93,7 +95,9 @@ class WeatherController extends Controller
                 return $this->errorResponse(null, self::BAD_REQUEST);
             }
 
-            return new WeatherResource($weather);
+            $weatherResource = new WeatherResource($weather);
+
+            return $this->successResponse($weatherResource, self::OK);
 
         } catch (\Exception $e) {
 
