@@ -54,6 +54,14 @@ Sirve para la obtención del token de autenticación para el resto de apis ya qu
         - https://wanqara.test/api/auth/login
         - POST
 
+Usuarios creados con los **seeders**:
+
+        - User: test1@example.com 
+        - Pass: test12345
+
+        - User: test2@example.com 
+        - Pass: test23456
+
 ## Api Clima
 
 ### 1. List
