@@ -148,3 +148,7 @@ Parametros:
             "record_id": 1,
             "comment": "Nuevo reporte del clima frio"
         }
+
+# Observaciones
+
+En caso de tener un error asi en el log **Route [login] not defined**. de debe agregar a los **headers** de la api en **Postman** el **Accept: application/json**.
