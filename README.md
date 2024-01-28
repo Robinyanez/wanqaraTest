@@ -1,66 +1,150 @@
+# Wanqara Test Api
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Levantamiento de proyecto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Se procede a trabajar con la aplicación **laragon** para desplegar las herramientas como **PHP** en su versión 8.1 en adelante, **Nginx** y **Mysql** en su versión 8 en adelante.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Nos ayuda y facilita el despliegue rapido para las aplicaciones **Laravel** asi como otros entornos de desarrollo.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Tambien nos proporciona certificados ssl y ayuda con la creación automatica de un **Host Name** para nuesta aplicación ejemplo: **wanqara.test**.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Clonación del proyecto
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Para clonar el repositorio de **Wanqara Test Api**, realizar un **git clone** de la rama de development ya que aqui se encuentra el test, se puede usar los siguientes comandos.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+        -  git clone --branch development https://github.com/Robinyanez/wanqaraTest.git
+        -  git clone -b development https://github.com/Robinyanez/wanqaraTest.git
 
-## Laravel Sponsors
+## Instalacion de paquetes
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Luego de clonar el repositorio de **Wanqara Test Api** seguir lo siguientes paso para que todo funcione correctamente, todos los siguientes comando tienen que ser ejecutados por linea de comandos en la raiz del proyecto que se clono.
 
-### Premium Partners
+Ejecutar **composer install**, esto instalara las dependecias necesarias para que laravel funcione.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Ejecutar el comando **cp .env.example .env** para copiar el .env de ejemplo y posteriormente llenar los datos que correspondan (solicitar al encargado).
 
-## Contributing
+En caso de tener problemas para iniciar el proyecto debido a una key erronea ejecutar **php artisan key:generate** para obtener una nueva clave para el proyecto.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Crear una base de datos y configurar los parametros dentro del archivo .env para luego poder ejecutar **php artisan migrate**, con esto generaremos las tablas necesarias para el proyecto.
 
-## Code of Conduct
+Luego de esto tambien ejecutar **php artisan db:seed**, lo que nos ayudara a tener usuarios de prueba para realizar la autenticación en la aplicación.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Se necesita que se tenga una **Api Key** del sitio [OpenWeatherMap](https://openweathermap.org/api), luego de obtener la **Api Key** se debe crear una variable en el archivo .env con el nombre de **OPENWEATHERMAP_API_KEY** con el valor obtenidO de **OpenWeatherMap**
 
-## Security Vulnerabilities
+# Explicación de funcionamiento del proyecto.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Se explica de manera rapida el funcionamiento de las apis para lo solicitado en la prueba.
 
-## License
+Para el manejor de token se utilizo **Sanctum** ya que este es apropiado para este test ya que facil de utilizar y ligero a su vez.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Api Auth
+
+Sirve para la obtención del token de autenticación para el resto de apis ya que todas estan protegidas con el **middleware auth:sanctum**.
+
+        - Login
+        - https://wanqara.test/api/auth/login
+        - POST
+
+## Api Clima
+
+### 1. List
+
+Sirve para obtener todos los registros con sus respectivos comentarios.
+
+        - https://wanqara.test/api/weather
+        - GET
+
+### 2. Store
+
+Sirve para realizar el guardado de los datos desde la **Api** de **OpenWeatherMap** en nuestra base de datos.
+
+La **Api** esta creada con el parametro a buscar que es la **ciudad** (city).
+
+        - https://wanqara.test/api/weather
+        - POST
+
+Parametros:
+
+        {
+            "city": "Ambato"
+        }
+
+### 3. Show
+
+Sirve para traer un dato en especifico tambien trae sus respectivos comentarios.
+
+El valor **1** de la **url** pertenece al id del registro guardado en la base de datos.
+
+        - https://wanqara.test/api/weather/1
+        - GET
+
+### 4. Clima Comentario
+
+Sirve para crear un registro de comentario asociado a un clima, el proceso para lograr esto es realizar una petición al metodo **List** o **Show** para poder obtener un id, en el caso de que sea la primera vez, si estos metodos anteriores no retornan valor alguno es necesario realizar una petición al metodo **Store**, para empezar a guardar datos en nuestra base de datos.
+
+        - https://wanqara.test/api/weather/comment
+        - POST
+
+Parametros:
+
+        {
+            "city_id": 1,
+            "comment": "Nuevo reporte del clima"
+        }
+
+## Api Reporte
+
+### 1. List
+
+Sirve para obtener todos los registros con sus respectivos comentarios.
+
+        - https://wanqara.test/api/record
+        - GET
+
+### 2. Store
+
+Sirve para realizar el guardado de los datos de un registro.
+
+La **Api** esta creada con los parametros **tipo** (type) y **descripción** (description).
+
+        - https://wanqara.test/api/record
+        - POST
+
+Parametros:
+
+        {
+            "type": "clima",
+            "description": "frio"
+        }
+
+### 3. Show
+
+Sirve para traer un dato en especifico tambien trae sus respectivos comentarios.
+
+El valor **1** de la **url** pertenece al id del registro guardado en la base de datos.
+
+        - https://wanqara.test/api/record/1
+        - GET
+
+### 4. Reporte Comentario
+
+Sirve para crear un comentario asociado a registro, el proceso para lograr esto es realizar una petición al metodo **List** o **Show** para poder obtener un id, en el caso de que sea la primera vez, si estos metodos anteriores no retornan valor alguno es necesario realizar una petición al metodo **Store**, para empezar a guardar datos en nuestra base de datos.
+
+        - https://wanqara.test/api/record/comment
+        - POST
+
+Parametros:
+
+        {
+            "record_id": 1,
+            "comment": "Nuevo reporte del clima frio"
+        }

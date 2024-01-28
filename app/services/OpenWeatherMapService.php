@@ -2,11 +2,10 @@
 
 namespace App\Services;
 
-use App\Interfaces\HttpCodeInterface;
 use GuzzleHttp\Client;
 use App\Traits\Utilities\ApiResponse;
 
-class OpenWeatherMapService implements HttpCodeInterface
+class OpenWeatherMapService
 {
     use ApiResponse;
 
@@ -21,13 +20,27 @@ class OpenWeatherMapService implements HttpCodeInterface
 
     public function getWeatherByCity($city)
     {
-        $response = $this->client->get('weather', [
-            'query' => [
-                'q' => $city,
-                'appid' => $this->apiKey,
-            ],
-        ]);
+        try {
 
-        return $this->successResponse($response->getBody()->getContents(), self::OK, 'success');
+            $response = $this->client->get('weather', [
+                'query' => [
+                    'q'     => $city,
+                    'units' => 'metric',
+                    'appid' => $this->apiKey,
+                ],
+            ]);
+
+            if ($response->getStatusCode() != 200) {
+
+                return $this->errorResponse(null, $response->getStatusCode());
+            }
+
+            return json_decode($response->getBody()->getContents());
+
+        } catch (\Exception $e) {
+
+            return $this->errorResponse($e->getMessage(),$e->getCode());
+
+        }
     }
 }
